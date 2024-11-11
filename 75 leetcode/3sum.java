@@ -52,3 +52,32 @@ class Solution {
         };
     }
 }
+
+//
+
+/* 
+Sort the Array:
+Sort the array in non-decreasing order to simplify the search process and allow for an efficient two-pointer method.
+Loop Through Each Element:
+
+Loop through the array up to the third-last element. For each element at index i, treat it as the first element of a potential triplet.
+Set a Target Sum:
+
+For each nums[i], calculate a target sum as -nums[i]. We want to find two other elements that add up to this target to achieve a sum of zero with nums[i].
+Initialize Two Pointers:
+
+Set up two pointers: one (j) just after i and the other (k) at the end of the array. These pointers help us find pairs that meet the target sum.
+Search for Pair with Target Sum:
+
+While the left pointer j is less than the right pointer k:
+If nums[j] + nums[k] == target, add the triplet {nums[i], nums[j], nums[k]} to the results.
+Move both pointers inward to explore other pairs.
+If nums[j] + nums[k] < target, increment j to increase the sum.
+If nums[j] + nums[k] > target, decrement k to decrease the sum.
+Skip Duplicates:
+
+Skip duplicates for nums[i] to avoid repeating the same triplet.
+Similarly, after finding a valid pair, skip over consecutive duplicates of nums[j] and nums[k] to ensure unique pairs.
+Repeat Until All Triplets are Found:
+
+Continue this process for each element until you’ve checked all possible unique triplets that sum to zero. */
