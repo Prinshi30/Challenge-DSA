@@ -67,3 +67,73 @@ class Solution {
         return true;
     }
 }
+
+/* another way */
+/* class Solution {
+    // Boolean flag to keep track if a cycle is detected
+    boolean cycle = false;
+    
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        // Step 1: Build an adjacency list for the graph representation of courses and prerequisites
+        ArrayList<Integer> graph[] = new ArrayList[numCourses];
+        
+        // Initialize the adjacency list where each course points to an empty list initially
+        for (int i = 0; i < numCourses; i++) {
+            graph[i] = new ArrayList<>();
+        }
+        
+        // Populate the adjacency list with the prerequisites
+        // Each entry prerequisites[i][0] depends on prerequisites[i][1]
+        for (int i = 0; i < prerequisites.length; i++) {
+            graph[prerequisites[i][0]].add(prerequisites[i][1]);
+        }
+        
+        // Step 2: Initialize arrays to keep track of visited nodes and nodes in the recursion stack
+        int visited[] = new int[numCourses];
+        int recStack[] = new int[numCourses];
+        
+        // Step 3: Check each course to detect any cycle in the dependencies
+        for (int i = 0; i < numCourses; i++) {
+            // If the course has not been visited yet, start a DFS from it
+            if (visited[i] == 0) {
+                detectCycle(graph, visited, recStack, i);
+            }
+            // If a cycle is detected, return false as it's not possible to complete all courses
+            if (cycle) return false;
+        }
+        
+        // If no cycles were found, it's possible to complete all courses
+        return true;
+    }
+
+    // Helper method to perform DFS and detect cycles
+    private void detectCycle(ArrayList<Integer> graph[], int visited[], int[] recStack, int v) {
+        // If a cycle is already detected, stop further processing
+        if (cycle) return;
+
+        // Mark the current course as visited and add it to the recursion stack
+        visited[v] = 1;
+        recStack[v] = 1;
+        
+        // Go through each course that `v` depends on
+        for (int i = 0; i < graph[v].size(); i++) {
+            int neighbor = graph[v].get(i);
+            
+            // If the neighbor is already in the recursion stack, we found a cycle
+            if (recStack[neighbor] == 1) {
+                cycle = true;
+                return;
+            }
+            
+            // If the neighbor course hasn't been visited, recursively check it
+            if (visited[neighbor] == 0) {
+                detectCycle(graph, visited, recStack, neighbor);
+            }
+        }
+        
+        // Remove the current course from the recursion stack as we backtrack
+        recStack[v] = 0;
+    }
+}
+
+ */
