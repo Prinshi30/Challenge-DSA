@@ -2,6 +2,7 @@ class Solution {
     public int maxArea(int[] height) {
         int max = 0;  // Variable to store the maximum area found
         int left = 0;  // Left pointer starting at the beginning of the array
+        
         int right = height.length - 1;  // Right pointer starting at the end of the array
 
         // Continue until the two pointers meet
